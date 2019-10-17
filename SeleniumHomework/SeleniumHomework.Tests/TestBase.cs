@@ -1,6 +1,8 @@
 using NUnit.Framework;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
+using OpenQA.Selenium.Support.UI;
+using System;
 using System.IO;
 using System.Reflection;
 
@@ -13,11 +15,14 @@ namespace Tests
             Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
 
         protected IWebDriver _driver;
+        protected WebDriverWait _wait;
 
         [SetUp]
         public void Setup()
         {
             _driver = new ChromeDriver(_pathToDriver);
+            _wait = new WebDriverWait(_driver, TimeSpan.FromSeconds(2));
+            _driver.Manage().Window.Maximize();
         }
 
         [TearDown]
